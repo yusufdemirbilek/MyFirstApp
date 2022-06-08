@@ -1,8 +1,13 @@
 //import logo from './logo.svg';
 //import './App.css';
+import React,{useState} from "react";
 import Card from "./components/Card";
 import ExpenseItem from "./components/ExpenseItem";
 import   "./components/Expenses.css";
+import NewExpense from './components/NewExpense';
+import ExpenseFilter from "./components/ExpenseFilter";
+
+
 function App() {
 
   const expenses = [
@@ -26,12 +31,28 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+  const addExpenseHandler= (expense) => {
+    console.log('In App.js');
+    console.log(expense);
+  }
 
+  const [filteredYear,setFilteredYear] = useState('2020');
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+
+  }
   return (
+    
+   
+    
     <div>
-      <h2>Let Start</h2>
-    <Card className="expenses">
+
+   
+     <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
      
+    <Card className="expenses">
+    <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpenseFilter>
+   
       <ExpenseItem title={expenses[0].title} amount={expenses[0].amount} date={expenses[0].date}>
       </ExpenseItem>
       
